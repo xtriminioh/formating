@@ -2,6 +2,19 @@ import pandas as pd
 from config_viewp import pandas_start
 from re import findall as find
 
+def clean_pattern(pattern:str, objStr:str) -> str:
+    """Creamos una salida limpia para segun el pattern objStr 
+
+    Args:
+        pattern (str): pattern de busqueda 
+        objStr (str): Elemento string 
+
+    Returns:
+        str: resultado_con formado 
+    """
+    result = ' '.join(find(pattern,objStr)).replace('RC A ','')
+    result = result.replace('RC B ','')
+    return result
 
 def openDocument(path:str) -> pd.DataFrame:
     '''Abrimos el documento de los pedidos y le damos el formato deseado.'''
@@ -33,12 +46,15 @@ def filtros(data:pd.DataFrame) -> pd.DataFrame:
     '''Se realiza un filtrado de los diferentes elementos
         que no se desean dentro del documento final
     '''
-    data = data[data.cliente.str.contains('CONSUMIDOR')]
     data = data[data.sub_cliente.notnull()] #sub_cliente vacios
     data = data[data.sub_cliente != '980'] #elimina los items de fletes
     data = data[data.sub_cliente != '908'] #elimina los items de concreto
     data = data[data.sub_cliente != '982'] #elimina los items de servicios por distancia
 
+    return data
+
+def formato_salida(data:pd.DataFrame) -> pd.DataFrame:
+    data = data.set_index('orden')
     return data
 
 def formatear_orden(document:pd.DataFrame) -> pd.DataFrame:
@@ -92,12 +108,16 @@ def formatear_cliente(document:pd.DataFrame) -> pd.DataFrame:
 
 def formatear_sub_cliente(data:pd.DataFrame) -> pd.DataFrame:
     ''''Realizar la asignacion de los nombres a los cliente'''
-    catg = ['910C','911']
-    ordenes = [row.orden for _, row in data.iterrows() if row.descripcion == 'PO Number:']
+    #Filtramos por cliente = CONSUMIDOR
+    pattern = r'[A-Z]+'
+    ordenes = [row.orden 
+                for _, row in data.iterrows() if row.descripcion == 'PO Number:' and row.cliente == 'CONSUMIDOR FINAL SPS']
+    clientes = {row.orden: clean_pattern(pattern,row.sub_cliente)
+                for _, row in data.iterrows() if row.descripcion == 'PO Number:'}
 
-    for i, row in data.iterrows(): 
-        if row.orden in ordenes and not row.sub_cliente in catg:
-            data.at[i,'cliente'] = (row.sub_cliente)
+    for i, row in data.iterrows():
+        if row.orden in ordenes:
+            data.at[i,'cliente'] = clientes[row.orden]
     data = data[data.cantidad.notnull()]
     return data 
 
@@ -112,4 +132,5 @@ if __name__ == '__main__':
     doc = formatear_cliente(doc.copy())
     doc = filtros(doc.copy())
     doc = formatear_sub_cliente(doc.copy())
-    print(doc.head(20))
+    doc = formato_salida(doc.copy())
+    doc.to_excel('out.xlsx')

@@ -1,7 +1,5 @@
-"""Configuracion para visualizar los datos en la terminal,
-    Para el uso de la Libreria de Pandas"""
-
 def pandas_start(pd) -> None:
+    """Configuracion para visualizar los datos en la terminal, Para el uso de la Libreria de Pandas"""
     options ={
         'display':{
             'max_columns':None,
