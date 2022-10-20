@@ -83,11 +83,11 @@ def formatear_tipo_envio(data:pd.DataFrame) -> pd.DataFrame:
         tengan el codigo del flete 9800001 para relizar el replazo'''
     
     #buscamos todos los registro con el codigo 9800001 y hacemos un listado con las mismas.
-    ordenes = [str(row.orden) for i, row in data.iterrows() if data.at[i,'tipo'] == 'FLETE']
+    ordenes = [str(row.orden) for i, row in data.iterrows() if data.at[i,'cliente'] == '9800001']
 
     #realizamos la sustitucion
     for i, row in data.iterrows():
-        if str(row.cliente) in ordenes:
+        if str(row.orden) in ordenes:
             data.at[i,'tipo'] = 'FLETE'
         else:
             data.at[i,'tipo'] = 'PROPIA'
@@ -126,11 +126,12 @@ if __name__ == '__main__':
     pandas_start(pd)
     path = '.\DataSet\OpenOrder.xls'
     doc = openDocument(path)
-    doc = formatear_orden(doc.copy())
-    doc = formatear_fecha(doc.copy())
-    doc = formatear_tipo_envio(doc.copy())
-    doc = formatear_cliente(doc.copy())
-    doc = filtros(doc.copy())
-    doc = formatear_sub_cliente(doc.copy())
-    doc = formato_salida(doc.copy())
-    doc.to_excel('out.xlsx')
+    doc = formatear_orden(doc)
+    doc = formatear_fecha(doc)
+    doc = formatear_tipo_envio(doc)
+    print(doc.head(10))
+    #doc = formatear_cliente(doc)
+    #doc = filtros(doc)
+    #doc = formatear_sub_cliente(doc)
+    #doc = formato_salida(doc)
+    #doc.to_excel('out.xlsx')
