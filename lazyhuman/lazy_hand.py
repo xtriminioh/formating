@@ -120,7 +120,9 @@ class LazyHand():
         data = data[data.cantidad.notnull()]
         return data 
 
-    @property
-    def guardar(self) -> None:
-        filename = self.path.split('/')[-1].split('.')[0] 
-        self.data.to_excel(f'{filename}_out.xlsx')
+    def guardar(self, pathout) -> None:
+        filename = self.path.split('/')[-1].split('.')[0]
+        pathout = pathout.replace(filename,'').split('.')[0]
+        filename = filename.replace(' ','')
+        pathout = f"{pathout}{filename}_out.xlsx"
+        self.data.to_excel(pathout)

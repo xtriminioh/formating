@@ -6,12 +6,11 @@ from lazyhuman import LazyHand
 
 root = Tk()
 root.title('Formating')
-#root.geometry('300x200')
 root.resizable(0,0)
 root.columnconfigure(0, weight=1)
 root.rowconfigure(0, weight=1)
 
-message = StringVar()
+message = StringVar() 
 filepath = StringVar()
 
 def openfile() :
@@ -21,7 +20,8 @@ def openfile() :
 
 def formating():
     message.set(f'Formating {message.get()}')
-    LazyHand(filepath.get()).guardar
+    file = LazyHand(filepath.get())
+    file.guardar(filepath.get())
     message.set('Ready...')
 
 class MainFrameButtons(ttk.Frame):
