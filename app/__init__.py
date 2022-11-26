@@ -21,9 +21,12 @@ def create_app(test_config=None):
     except OSError:
         pass
 
+    from . import db
+    db.init_app(app)
+
     #routes
     @app.route('/')
     def home():
-        return 'Hola'
+        return 'Hola, todo bien por los momentos'
 
     return app
