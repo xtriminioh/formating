@@ -1,11 +1,41 @@
 {% extends 'base.html' %}
 
 {% block content %}
-    <form method="post">
-        <label for="username">Username</label>
-        <input name="username" id="username" required>
-        <label for="password">Password</label>
-        <input type="password" name="password" id="password" required>
-        <input type="submit" value="Register">
-    </form>
+    <div class="container py-5 h-100">
+        <div class="row d-flex justify-content-center align-items-center h-100">
+            <div class="col-12 col-md-8 col-lg-6 col-xl-5">
+                <div class="card bg-light">
+                    <div class="card-body p-5">
+                        <h2 class="mb-5 text-center">
+                            Nuevo Usuario
+                            <svg xmlns="http://www.w3.org/2000/svg"
+                                width="36" height="36"
+                                fill="currentColor"
+                                class="bi bi-person-fill-add text-primary align-center"
+                                viewBox="0 0 16 16">
+                                <path d="M12.5 16a3.5 3.5 0 1 0 0-7 3.5 3.5 0 0 0 0 7Zm.5-5v1h1a.5.5 0 0 1 0 1h-1v1a.5.5 0 0 1-1 0v-1h-1a.5.5 0 0 1 0-1h1v-1a.5.5 0 0 1 1 0Zm-2-6a3 3 0 1 1-6 0 3 3 0 0 1 6 0Z"/>
+                                <path d="M2 13c0 1 1 1 1 1h5.256A4.493 4.493 0 0 1 8 12.5a4.49 4.49 0 0 1 1.544-3.393C9.077 9.038 8.564 9 8 9c-5 0-6 3-6 4Z"/>
+                            </svg>
+                        </h2>
+
+                        <form method="post">
+                            <div class="form-group">
+                                <label for="username" class="is_required text-muted">Usuario</label>
+                                <input name="username" class="form-control"
+                                    id="username" placeholder="Nombre de Usuario" required>
+                            </div>
+                            <div class="form-group">
+                                <label for="password" class="is_required text-muted">Contraseña</label>
+                                <input name="password" type="password" class="form-control"
+                                    id="password" placeholder="Contraseña" required>
+                            </div>
+                            <div class="form-group">
+                                <input type="submit" class="btn btn-block btn-primary mt-3" value="Registar">
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
 {% endblock %}
