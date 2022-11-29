@@ -1,15 +1,41 @@
 {% extends 'base.html' %}
 
-{% block header %}
-    <h1>{% block title %}Login{% endblock %}</h1>
-{% endblock %}
-
 {% block content %}
-    <form method="post">
-        <label for="username">Username</label>
-        <input name="username" id="username" required>
-        <label for="password">Password</label>
-        <input type="password" name="password" id="password" required>
-        <input type="submit" value="Login">
-    </form>
+    <div class="container py-5 h-100">
+        <div class="row d-flex justify-content-center align-items-center h-100">
+            <div class="col-12 col-md-8 col-lg-6 col-xl-5">
+                <div class="card bg-light">
+                    <div class="card-body p-5">
+
+                        <h2 class="mb-5 text-center">
+                            Sign In 
+                            <svg xmlns="http://www.w3.org/2000/svg"
+                                width="36" height="36"
+                                fill="currentColor"
+                                class="bi bi-person-fill text-primary"
+                                viewBox="0 0 14 14">
+                                <path d="M3 14s-1 0-1-1 1-4 6-4 6 3 6 4-1 1-1 1H3Zm5-6a3 3 0 1 0 0-6 3 3 0 0 0 0 6Z"/>
+                            </svg>
+                        </h2>
+
+                        <form method="post">
+                            <div class="form-group">
+                                <label for="username" class="is_required text-muted">Usuario</label>
+                                <input name="username" class="form-control"
+                                    id="username" placeholder="Nombre de Usuario" required>
+                            </div>
+                            <div class="form-group">
+                                <label for="password" class="is_required text-muted">Contraseña</label>
+                                <input name="password" type="password" class="form-control"
+                                    id="password" placeholder="Contraseña" required>
+                            </div>
+                            <div class="form-group">
+                                <input type="submit" class="btn btn-block btn-primary mt-3" value="Login">
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
 {% endblock %}
