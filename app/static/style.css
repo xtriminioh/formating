@@ -1,3 +1,7 @@
+body {
+    background-image: url("/home/pi/dev/formating/app/asset/WallpaperTools/wtools01.jpg");
+}
+
 .flash {
     margin: 1em 0;
     padding: 1em;

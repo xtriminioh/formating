@@ -135,4 +135,5 @@ dmypy.json
 *.xls
 *.xlsx
 
-
+# Environments Configuration
+.pyrightconfig.json
