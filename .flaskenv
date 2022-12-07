@@ -2,5 +2,9 @@ FLASK_APP=app
 FLASK_DEV=development
 FLASK_DEBUG=1
 FLASK_RUN_HOST=0.0.0.0
+<<<<<<< HEAD
 FLASK_RUN_PORT=6035
+=======
+FLASK_RUN_PORT=8075
+>>>>>>> develop
 

@@ -43,7 +43,7 @@ def login():
     if request.method == 'POST':
         username = request.form['username']
         password = request.form['password']
-        db = db_get()
+        db = get_db()
         error = None
         user = db.execute(
                 'SELECT * FROM user WHERE username = ?', (username,)
